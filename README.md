@@ -4,6 +4,6 @@ ConcertAPI is a program that uses an API that has concert data to build a websit
 
 1. Frontend: HTML and Tailwind CSS
 2. Backend: Go + Javascript
-3. API is written is JSON
+3. API link will be provided (Raw JSON)
 
 Project still in works
