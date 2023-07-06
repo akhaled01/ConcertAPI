@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ConcertAPI</title>
+    <link rel="stylesheet" href="output.css" />
+    <style>
+      .ui-btn {
+        --btn-default-bg: rgb(41, 41, 41);
+        --btn-padding: 15px 20px;
+        --btn-hover-bg: rgb(51, 51, 51);
+        --btn-transition: 0.3s;
+        --btn-letter-spacing: 0.1rem;
+        --btn-animation-duration: 1.2s;
+        --btn-shadow-color: rgba(0, 0, 0, 0.137);
+        --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+        --hover-btn-color: #fac921;
+        --default-btn-color: #fff;
+        --font-size: 16px;
+        /* 👆 this field should not be empty */
+        --font-weight: 600;
+        --font-family: Menlo, Roboto Mono, monospace;
+        /* 👆 this field should not be empty */
+      }
+
+      /* button settings 👆 */
+
+      .ui-btn {
+        box-sizing: border-box;
+        padding: var(--btn-padding);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--default-btn-color);
+        font: var(--font-weight) var(--font-size) var(--font-family);
+        background: var(--btn-default-bg);
+        border: none;
+        cursor: pointer;
+        transition: var(--btn-transition);
+        overflow: hidden;
+        box-shadow: var(--btn-shadow);
+      }
+
+      .ui-btn span {
+        letter-spacing: var(--btn-letter-spacing);
+        transition: var(--btn-transition);
+        box-sizing: border-box;
+        position: relative;
+        background: inherit;
+      }
+
+      .ui-btn span::before {
+        box-sizing: border-box;
+        position: absolute;
+        content: "";
+        background: inherit;
+      }
+
+      .ui-btn:hover,
+      .ui-btn:focus {
+        background: var(--btn-hover-bg);
+      }
+
+      .ui-btn:hover span,
+      .ui-btn:focus span {
+        color: var(--hover-btn-color);
+      }
+
+      .ui-btn:hover span::before,
+      .ui-btn:focus span::before {
+        animation: chitchat linear both var(--btn-animation-duration);
+      }
+
+      @keyframes chitchat {
+        0% {
+          content: "#";
+        }
+
+        5% {
+          content: ".";
+        }
+
+        10% {
+          content: "^{";
+        }
+
+        15% {
+          content: "-!";
+        }
+
+        20% {
+          content: "#$_";
+        }
+
+        25% {
+          content: "№:0";
+        }
+
+        30% {
+          content: "#{+.";}35%{content: "@}-?";
+        }
+
+        40% {
+          content: "?{4@%";
+        }
+
+        45% {
+          content: "=.,^!";
+        }
+
+        50% {
+          content: "?2@%";
+        }
+
+        55% {
+          content: "\;1}]";
+        }
+
+        60% {
+          content: "?{%:%";
+          right: 0;
+        }
+
+        65% {
+          content: "|{f[4";
+          right: 0;
+        }
+
+        70% {
+          content: "{4%0%";
+          right: 0;
+        }
+
+        75% {
+          content: "'1_0<";
+          right: 0;
+        }
+
+        80% {
+          content: "{0%";
+          right: 0;
+        }
+
+        85% {
+          content: "]>'";
+          right: 0;
+        }
+
+        90% {
+          content: "4";
+          right: 0;
+        }
+
+        95% {
+          content: "2";
+          right: 0;
+        }
+
+        100% {
+          content: "";
+          right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      class="relative flex items-center justify-center h-screen mb-12 overflow-hidden"
+      style="margin-bottom: 0px"
+    >
+      <div>
+        <div class="flex-col items-center justify-center">
+          <div
+            class="relative p-5 z-10 text-6xl text-white bg-opacity-50 rounded-xl"
+            style="font-family: 'Ubuntu', sans-serif"
+          >
+            ConcertAPI
+          </div>
+        </div>
+      </div>
+      <video
+        autoplay
+        loop
+        muted
+        class="absolute w-auto min-w-full max-w-none"
+        style="filter: brightness(25%)"
+      >
+        <source src="vid.mp4" type="video/mp4" />
+      </video>
+    </header>
+    <!---->
+    <div class="bg-zinc-900 h-auto w-full">
+      <div
+        class="text-5xl py-4 text-center text-nextOrange"
+        style="font-family: 'Ubuntu', sans-serif"
+      >
+        Top Bands
+      </div>
+      <!--Cards-->
+      <div class="flex justify-around py-5">
+        <!--1-->
+        <a
+          href="https://groupietrackers.herokuapp.com/api/artists"
+          target="_blank"
+          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+          >
+            Queens
+          </h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            Queen are a British rock band formed in London in 1970 by Freddie
+            Mercury (lead vocals, piano), Brian May (guitar, vocals) and Roger
+            Taylor (drums, vocals), later joined by John Deacon (bass).
+          </p>
+        </a>
+        <!--2-->
+        <a
+          href="https://groupietrackers.herokuapp.com/api/artists"
+          target="_blank"
+          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+          >
+            SOJA
+          </h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            SOJA (an acronym of Soldiers of Jah Army) is an American
+            Grammy-award winning reggae band based in Arlington, Virginia.
+            Formed in 1997, their music is currently produced under ATO Records.
+          </p>
+        </a>
+        <!--3-->
+
+        <a
+          href="https://groupietrackers.herokuapp.com/api/artists"
+          target="_blank"
+          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            Pink Floyd
+          </h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            Pink Floyd are an English rock band formed in London in 1965.
+            Gaining an early following as one of the first British psychedelic
+            groups, they were distinguished by their extended compositions,
+            sonic experimentation, philosophical lyrics and elaborate live
+            shows. They became a leading band of the progressive rock genre,
+            cited by some as the greatest progressive rock band of all time.
+          </p>
+        </a>
+      </div>
+      <div class="flex justify-center items-center w-max h-auto py-4 px-4">
+        <div>
+          <a href="https://groupietrackers.herokuapp.com/api" target="_blank">
+          <button class="ui-btn">
+            <span> Explore </span>
+          </button>
+        </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
