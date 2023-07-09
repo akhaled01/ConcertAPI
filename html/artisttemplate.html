@@ -1,11 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <style>
+      button {
+        padding: 10px 20px;
+        text-transform: uppercase;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #ffffff80;
+        text-shadow: none;
+        background: transparent;
+        box-shadow: transparent;
+        border: 1px solid #ffffff80;
+        transition: 0.5s ease;
+        user-select: none;
+      }
+
+      #btn:hover,
+      :focus {
+        color: #ffffff;
+        background: #00ff7b;
+        border: 1px solid #6fff00;
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+        box-shadow: 0 0 5px #00ff44, 0 0 20px #00ff44, 0 0 50px #00ff44,
+          0 0 100px #00ff44;
+      }
+    </style>
     <title>Artist Info</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body class="bg-stone-900">
+    <!--Artist Avatar-->
+    <div class="flex justify-center py-10">
+      <div class="relative">
+        <img
+          class="object-cover w-16 h-16 rounded-full"
+          src=".{{ImagePath}}"
+          alt="Artist Image"
+        />
+      </div>
+    </div>
+    <!--Artist name-->
+    <div class="text-6xl text-center text-green-500">.{{ArtistName}}</div>
+    <!--Artist Info-->
+    <div class="flex-col justify-start px-8 py-6">
+      <div class="text-white text-xl py-4">Members: .{{ArtistMembers}}</div>
+      <div class="text-white text-xl py-4">
+        Creation Date: .{{CreationDate}}
+      </div>
+      <div class="text-white text-xl py-4">
+        First Album: .{{FirstAlbumDate}}
+      </div>
+      <div class="text-white text-xl py-4">Locations: .{{Locations}}</div>
+      <div class="text-white text-xl py-4">
+        Concert Dates: .{{ConcertDates}}
+      </div>
+    </div>
+    <button id="btn" class="px-8 py-4" onclick="window.open('index.html', '_blank')">Back To HomePage</button>
+  </body>
 </html>
