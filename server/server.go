@@ -22,6 +22,8 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
     	ConcertAPI.StylesServ(w, req)
     case "/static/vid.mp4":
     	ConcertAPI.VidServe(w, req)
+    case "/bands.html":
+    	ConcertAPI.Bands(w, req)
 
     default:
         http.Error(w, "404 Not Found", 404)
