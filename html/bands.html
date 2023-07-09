@@ -134,7 +134,7 @@
         const container = document.getElementById("container");
 
         // Make an HTTP GET request to the API endpoint
-        fetch("https://groupietrackers.herokuapp.com/api/artists")
+        fetch("/artists")
           .then((response) => response.json()) // Parse the response data as JSON
           .then((data) => {
             // Loop over the data to generate 52 code snippets
