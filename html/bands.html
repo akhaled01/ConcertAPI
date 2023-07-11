@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
+    <script type="text/javascript" src="scripts.js"></script>
     <style>
       .button {
         -moz-appearance: none;
@@ -153,13 +154,14 @@
                   src="${artist.image}"
                   alt="${artist.name}"
                 />
+                <div class ="band_id${artist.id}" id="${artist.id}"></div>
                 <div class="px-6 py-4">
                   <div class="font-bold text-xl mb-2 text-center flex flex-wrap">${artist.name}</div>
                   <div class="py-6 flex justify-center">
-                    <button class="button">
+                    <button class="button" onclick="BandInfo(${artist.id})">
                       <span class="button_lg">
                         <span class="button_sl"></span>
-                        <<span class="button_text">More Info</span>
+                        <<span class="button_text" >More Info</span>
                       </span>
                     </button>
                   </div>
