@@ -1,9 +1,10 @@
 package main
 
 import (
-	"net/http"
-	"ConcertAPI/handlers"
+	ConcertAPI_handlers "ConcertAPI/handlers"
+	ConcertAPI_fileServers "ConcertAPI/handlers/file_servers"
 	"fmt"
+	"net/http"
 )
 
 func main() {
@@ -15,21 +16,22 @@ type router struct{}
 
 func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	fmt.Println(req.URL.Path)
-    switch req.URL.Path {
-    case "/":
-    	ConcertAPI.Index(w, req)
-    case "/output.css": // Serves the css file
-    	ConcertAPI.StylesServ(w, req)
-    case "/static/vid.mp4":
-    	ConcertAPI.VidServe(w, req)
-    case "/bands.html":
-    	ConcertAPI.Bands(w, req)
-    case "/artists":
-        ConcertAPI.Artists(w, req)
-    case "/scripts.js":
-        ConcertAPI.ScriptsServ(w, req)
-
-    default:
-        http.Error(w, "404 Not Found", 404)
-    }
+	switch req.URL.Path {
+	case "/":
+		ConcertAPI_fileServers.Index(w, req)
+	case "/output.css": // Serves the css file
+		ConcertAPI_fileServers.StylesServ(w, req)
+	case "/static/vid.mp4":
+		ConcertAPI_fileServers.VidServe(w, req)
+	case "/bands.html":
+		ConcertAPI_fileServers.Bands(w, req)
+	case "/artists":
+		ConcertAPI_handlers.Artists(w, req)
+	case "/scripts.js":
+		ConcertAPI_fileServers.ScriptsServ(w, req)
+	case "/bandinfo":
+		ConcertAPI_handlers.BandInfo(w, req)
+	default:
+		http.Error(w, "404 Not Found", 404)
+	}
 }
