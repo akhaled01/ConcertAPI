@@ -6,10 +6,12 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type Band struct {
 	Id           int      `json:"id"`
+	Name         string   `json:"name"`
 	Image        string   `json:"image"`
 	Members      []string `json:"members"`
 	CreationData int      `json:"creationData"`
@@ -36,9 +38,24 @@ func BandInfo(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(band[0])
 	origin := req.Header.Get("Origin")
 	w.Header().Set("Access-Control-Allow-Origin", origin)
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Content-Type", "application/json")
+
+	request_body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	band_id, _ := strconv.Atoi(string(request_body))
+	if band_id > 0 {
+		json_band_data, err := json.Marshal(band[band_id-1])
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		fmt.Fprint(w, string(json_band_data))
+	}
 }
