@@ -36,11 +36,12 @@ function fetch_band_template(filtered_band_info) {
     fetch(url_arist_page)
         .then(response => response.text())
         .then(html => {
-            html = html.replace(searchValue = `.{{ImagePath}}`, replaceValue = filtered_band_info.image)
-            html = html.replace(searchValue = `.{{ArtistName}}`, replaceValue = filtered_band_info.name)
-            html = html.replace(searchValue = `.{{ArtistMembers}}`, replaceValue = filtered_band_info.members)
-            html = html.replace(searchValue = `.{{CreationDate}}`, replaceValue = filtered_band_info.creationDate)
-            html = html.replace(searchValue = `.{{FirstAlbumDate}}`, replaceValue = filtered_band_info.firstAlbum)
+            html = html.replace(searchValue = `.{{ImagePath}}`, replaceValue = filtered_band_info.Image)
+            html = html.replace(searchValue = `.{{ArtistName}}`, replaceValue = filtered_band_info.Name)
+            html = html.replace(searchValue = `.{{ArtistMembers}}`, replaceValue = filtered_band_info.Members)
+            html = html.replace(searchValue = `.{{CreationDate}}`, replaceValue = filtered_band_info.CreationDate)
+            html = html.replace(searchValue = `.{{FirstAlbumDate}}`, replaceValue = filtered_band_info.FirstAlbum)
+            html = html.replace(searchValue = `.{{Locations}}`, replaceValue = filtered_band_info.Locations)
             targetElement.innerHTML = html;
         })
         .catch(error => {
