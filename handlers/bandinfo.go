@@ -23,7 +23,7 @@ type Recieved_Band struct {
 
 /* After we fetch the locations, it will be organized in this struct */
 type Recieved_Locations struct {
-	Locations []string `json:locations`
+	Locations []string `json:"locations"`
 }
 
 /* Proccessed data will go in this struct, and it's ready to be sent */
