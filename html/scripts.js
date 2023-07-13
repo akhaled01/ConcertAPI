@@ -39,7 +39,7 @@ function fetch_band_template(filtered_band_info) {
             html = html.replace(searchValue = `.{{ImagePath}}`, replaceValue = filtered_band_info.image)
             html = html.replace(searchValue = `.{{ArtistName}}`, replaceValue = filtered_band_info.name)
             html = html.replace(searchValue = `.{{ArtistMembers}}`, replaceValue = filtered_band_info.members)
-            html = html.replace(searchValue = `.{{CreationDate}}`, replaceValue = filtered_band_info.creationData)
+            html = html.replace(searchValue = `.{{CreationDate}}`, replaceValue = filtered_band_info.creationDate)
             html = html.replace(searchValue = `.{{FirstAlbumDate}}`, replaceValue = filtered_band_info.firstAlbum)
             targetElement.innerHTML = html;
         })
