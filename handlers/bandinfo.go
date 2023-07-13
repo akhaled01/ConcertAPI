@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-type Band struct {
+type Recieved_Band struct {
 	Id           int      `json:"id"`
 	Name         string   `json:"name"`
 	Image        string   `json:"image"`
@@ -20,8 +20,23 @@ type Band struct {
 	Relations    string   `json:"relations"`
 }
 
+type Sent_Band struct {
+	Id           int
+	Name         string
+	Image        string
+	Members      []string
+	CreationDate int
+	FirstAlbum   string
+	Locations    string
+	Relations    string
+}
+
+type Recieved_Locations struct {
+	Locations []string `json:locations`
+}
+
 func BandInfo(w http.ResponseWriter, req *http.Request) {
-	var band Band
+	var recieved_band Recieved_Band // Will be saving the recived JSON into this struct
 
 	request_body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
@@ -43,7 +58,7 @@ func BandInfo(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
-	err = json.Unmarshal(body, &band)
+	err = json.Unmarshal(body, &recieved_band)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,10 +68,18 @@ func BandInfo(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "application/json")
 
-	json_band_data, err := json.Marshal(band)
+	json_band_data, err := json.Marshal(recieved_band)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	fmt.Fprint(w, string(json_band_data))
+}
+
+func fetch_Locations(locations_url string) {
+
+}
+
+func fetch_Relations(locations_url string) {
+
 }
