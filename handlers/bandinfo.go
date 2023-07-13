@@ -20,6 +20,10 @@ type Recieved_Band struct {
 	Relations    string   `json:"relations"`
 }
 
+type Recieved_Locations struct {
+	Locations []string `json:locations`
+}
+
 type Sent_Band struct {
 	Id           int
 	Name         string
@@ -27,12 +31,8 @@ type Sent_Band struct {
 	Members      []string
 	CreationDate int
 	FirstAlbum   string
-	Locations    string
+	Locations    []string
 	Relations    string
-}
-
-type Recieved_Locations struct {
-	Locations []string `json:locations`
 }
 
 func BandInfo(w http.ResponseWriter, req *http.Request) {
@@ -68,16 +68,56 @@ func BandInfo(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "application/json")
 
-	json_band_data, err := json.Marshal(recieved_band)
+	struct_to_be_sent := construct_sent_band(recieved_band)
+
+	json_band_data, err := json.Marshal(struct_to_be_sent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	fmt.Fprint(w, string(json_band_data))
 }
+func construct_sent_band(received Recieved_Band) Sent_Band {
+	var sent_band Sent_Band
 
-func fetch_Locations(locations_url string) {
+	recieved_location := fetch_Locations(received.Locations)
 
+	/* Modifying the struct to be sent */
+	sent_band.Id = received.Id
+	sent_band.Name = received.Name
+	sent_band.Image = received.Image
+	sent_band.Members = received.Members
+	sent_band.CreationDate = received.CreationDate
+	sent_band.FirstAlbum = received.FirstAlbum
+	sent_band.Locations = recieved_location.Locations
+	sent_band.Relations = received.Relations
+
+	fmt.Println(sent_band)
+
+	return sent_band
+}
+func fetch_Locations(locations_url string) Recieved_Locations {
+	var recieved_locations Recieved_Locations // Will be saving the recived JSON into this struct
+
+	response, err := http.Get(locations_url)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer response.Body.Close()
+	// Ready the body into bytes
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = json.Unmarshal(body, &recieved_locations)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return recieved_locations
 }
 
 func fetch_Relations(locations_url string) {
