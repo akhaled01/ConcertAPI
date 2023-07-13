@@ -14,21 +14,30 @@ type Band struct {
 	Name         string   `json:"name"`
 	Image        string   `json:"image"`
 	Members      []string `json:"members"`
-	CreationData int      `json:"creationData"`
+	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
 	Locations    string   `json:"locations"`
 	Relations    string   `json:"relations"`
 }
 
 func BandInfo(w http.ResponseWriter, req *http.Request) {
-	var band []Band
+	var band Band
 
-	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	request_body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Convert the received body to integer
+	band_id, _ := strconv.Atoi(string(request_body))
+
+	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(band_id))
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	defer response.Body.Close()
+	// Ready the body into bytes
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -44,18 +53,10 @@ func BandInfo(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Content-Type", "application/json")
 
-	request_body, err := ioutil.ReadAll(req.Body)
+	json_band_data, err := json.Marshal(band)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-
-	band_id, _ := strconv.Atoi(string(request_body))
-	if band_id > 0 {
-		json_band_data, err := json.Marshal(band[band_id-1])
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		fmt.Fprint(w, string(json_band_data))
-	}
+	fmt.Fprint(w, string(json_band_data))
 }
